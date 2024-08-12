@@ -1,15 +1,20 @@
 package org.university.teacher;
 
 public abstract class Teacher {
-    private String name;
-    private double baseSalary;
+    private final String name;
+    private final double baseSalary;
+
+    public Teacher(String name, double baseSalary){
+        this.name = name;
+        this.baseSalary = baseSalary;
+    }
 
     public double getBaseSalary() {
-        return baseSalary;
+        return this.baseSalary;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     abstract double getSalary();
