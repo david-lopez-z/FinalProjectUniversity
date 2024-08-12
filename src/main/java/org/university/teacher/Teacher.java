@@ -9,12 +9,12 @@ public abstract class Teacher {
         this.baseSalary = baseSalary;
     }
 
-    public double getBaseSalary() {
+    protected double getBaseSalary() {
         return this.baseSalary;
     }
 
-    public String getName() {
-        return this.name;
+    protected String getName() {
+        return name;
     }
 
     abstract double getSalary();

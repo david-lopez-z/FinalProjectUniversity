@@ -11,6 +11,11 @@ public class PartTimeTeacher extends Teacher{
 
     @Override
     double getSalary() {
-        return getBaseSalary() * activeHours;
+        return getBaseSalary() * this.activeHours;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher: " + getName() + " has " + this.activeHours + " active hours";
     }
 }
