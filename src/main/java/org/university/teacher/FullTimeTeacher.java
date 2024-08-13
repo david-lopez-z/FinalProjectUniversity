@@ -3,13 +3,13 @@ package org.university.teacher;
 public class FullTimeTeacher extends Teacher {
     private final double yearsOfExperience;
 
-    public FullTimeTeacher(String name, double baseSalary, double yearsOfExperience) {
-        super(name, baseSalary);
+    public FullTimeTeacher(String name,int id, double baseSalary, double yearsOfExperience) {
+        super(name,id, baseSalary);
         this.yearsOfExperience = yearsOfExperience;
     }
 
     @Override
-    double getSalary() {
+    public  double getSalary() {
         return getBaseSalary() * this.yearsOfExperience * 1.1;
     }
 
