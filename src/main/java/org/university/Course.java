@@ -10,5 +10,15 @@ public class Course {
     private ArrayList<Student> students = new ArrayList<>();
     private Teacher teacher;
 
+    public void addStudent(Student student){
+        this.students.add(student);
+        student.addCourse(this);
+    }
+
+    public void removeStudent(Student student){
+        this.students.remove(student);
+        student.removeCourse(this);
+    }
+
 
 }
