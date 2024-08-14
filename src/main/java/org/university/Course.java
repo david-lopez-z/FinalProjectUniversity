@@ -10,6 +10,12 @@ public class Course {
     private ArrayList<Student> students = new ArrayList<>();
     private Teacher teacher;
 
+    public Course(String name, String description, Teacher teacher){
+        this.name = name;
+        this.description = description;
+        this.teacher = teacher;
+    }
+
     public void addStudent(Student student){
         this.students.add(student);
         student.addCourse(this);
@@ -23,5 +29,9 @@ public class Course {
     @Override
     public String toString() {
         return "Nombre: " + name + " Descripcion: " + description + "\n";
+    }
+
+    public String getName(){
+        return this.name;
     }
 }
