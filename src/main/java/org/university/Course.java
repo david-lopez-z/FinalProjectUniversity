@@ -20,5 +20,8 @@ public class Course {
         student.removeCourse(this);
     }
 
-
+    @Override
+    public String toString() {
+        return "Nombre: " + name + " Descripcion: " + description + "\n";
+    }
 }

@@ -12,4 +12,6 @@ abstract public class Person {
     protected String getName(){
         return this.name;
     }
+
+    protected int getId(){return this.id;}
 }

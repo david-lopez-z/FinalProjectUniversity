@@ -15,6 +15,6 @@ public class FullTimeTeacher extends Teacher {
 
     @Override
     public String toString() {
-        return "Teacher: " + getName() + " has " + this.yearsOfExperience + " years of experience";
+        return "Teacher: " + getName() + " has " + this.yearsOfExperience + " years of experience\n";
     }
 }
