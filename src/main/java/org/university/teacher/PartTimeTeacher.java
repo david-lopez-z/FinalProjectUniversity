@@ -16,6 +16,6 @@ public class PartTimeTeacher extends Teacher{
 
     @Override
     public String toString() {
-        return "Teacher: " + getName() + " has " + this.activeHours + " active hours";
+        return "Teacher: " + getName() + " has " + this.activeHours + " active hours\n";
     }
 }

@@ -17,9 +17,6 @@ public abstract class Teacher extends Person {
         return this.baseSalary;
     }
 
-    protected String getName() {
-        return getName();
-    }
 
     abstract double getSalary();
 }
