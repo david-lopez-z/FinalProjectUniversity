@@ -1,4 +1,4 @@
-package org.university.teacher;
+package org.university.people.teacher;
 
 public class FullTimeTeacher extends Teacher {
     private final double yearsOfExperience;

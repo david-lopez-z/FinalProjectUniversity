@@ -1,9 +1,8 @@
 package org.university.console;
 
-import org.university.Course;
-import org.university.Student;
+import org.university.people.Student;
 import org.university.University;
-import org.university.teacher.Teacher;
+import org.university.people.teacher.Teacher;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

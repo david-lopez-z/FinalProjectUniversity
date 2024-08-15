@@ -1,8 +1,6 @@
-package org.university.teacher;
-import org.university.Course;
-import org.university.Person;
+package org.university.people.teacher;
+import org.university.people.Person;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Teacher extends Person {

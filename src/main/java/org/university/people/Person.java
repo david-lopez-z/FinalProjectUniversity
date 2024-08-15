@@ -1,4 +1,4 @@
-package org.university;
+package org.university.people;
 
 abstract public class Person {
     private String name;
