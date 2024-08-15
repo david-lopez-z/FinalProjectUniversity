@@ -1,0 +1,27 @@
+package org.university.teacher;
+import org.university.Course;
+import org.university.Person;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public abstract class Teacher extends Person {
+    private final double baseSalary;
+    private static HashMap<Integer,Teacher> teachers = new HashMap<>();
+
+    public Teacher(String name,int id, double baseSalary){
+        super(name,id);
+        this.baseSalary = baseSalary;
+    }
+
+    protected double getBaseSalary() {
+        return this.baseSalary;
+    }
+
+    public static HashMap<Integer,Teacher> geTeachersHashmap(){
+        return teachers;
+    }
+
+
+    abstract double getSalary();
+}
