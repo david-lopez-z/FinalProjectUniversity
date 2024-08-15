@@ -10,17 +10,25 @@ import java.util.List;
 
 public class University {
     private String name;
-    private HashMap<String,Course> availableClasses = new HashMap<>();
-    private HashMap<Integer,Teacher> teachers = new HashMap<>();
-    private HashMap<Integer,Student> students = new HashMap<>();
-    private int studentCount = -1;  // These two start at -1 because I need the first id to be 0
-    private int teacherCount = -1; // and don't want to completely rework the methods mb
+    private HashMap<String,Course> availableClasses = Course.getAvailableClassesHashmap();
+    private HashMap<Integer,Teacher> teachers = Teacher.geTeachersHashmap();
+    private HashMap<Integer,Student> students = Student.getStudentsHashmap();
+    private int studentCount = 0;  // Bamboozled
+    private int teacherCount = 0; //  Check the old comment to get the joke hahahaha
     private List<Integer> activeStudentIds = new ArrayList<>();
     private List<Integer> activeTeacherIds = new ArrayList<>();
     private List<String> activeClasses = new ArrayList<>();
 
     public University(String name){
         this.name = name;
+    }
+
+    public ArrayList<Student> getAllStudents(){
+        return new ArrayList<Student>(students.values());
+    }
+
+    public Teacher getTeacherById(int id){
+        return this.teachers.get(id);
     }
 
     public University(String name, HashMap<String,Course> availableClasses, HashMap<Integer,Teacher> teachers, HashMap<Integer, Student> students, int studentCount, List<Integer> activeIds) {
@@ -32,12 +40,21 @@ public class University {
         this.activeStudentIds = activeIds;
     }
 
-    public void addClass(Course course){
-        this.availableClasses.put(course.getName(),course);
+    public Course getClassByName(String name){
+        return availableClasses.get(name);
+    }
+
+    public void addClass(String name, String description, ArrayList<Student> students, Teacher teacher){
+        Course course = new Course(name,description,teacher);
+        for(Student student: students){
+            course.addStudent(student);
+        }
+        this.activeClasses.add(name);
+        this.availableClasses.put(name,course);
     }
 
     public void removeClass(Course course){
-        this.availableClasses.remove(course);
+        this.availableClasses.remove(course.getName());
     }
 
     public String queryAllTeachers(){
@@ -50,7 +67,8 @@ public class University {
     }
 
     public String queryAllClasses(){
-        String output = "";
+        //System.out.println("this works2");
+        String output = "List of classes: \n";
         StringBuilder sb = new StringBuilder(output);
         for(String courseName: activeClasses){
             sb.append(availableClasses.get(courseName).toString());
@@ -58,18 +76,17 @@ public class University {
         return sb.toString();
     }
 
-    public String queryClassByName(String name){
-
-        return availableClasses.get(name).toString();
+    public String queryDetailedClassByName(String name){
+        return availableClasses.get(name).getAllInfo();
     }
 
-    public  String addStudent(String name){
-        studentCount++;
+    public Student addStudent(String name){
         Student newStudent = new Student(name,studentCount);
+        studentCount++;
         activeStudentIds.add(studentCount);
         students.put(studentCount,newStudent);
 
-        return "Student created with id: " + studentCount;
+        return newStudent;
     }
 
     public void removeStudent(int id){
@@ -77,20 +94,20 @@ public class University {
         activeStudentIds.remove(studentCount);
     }
 
-    public String addPartTimeTeacher(String name,int id, double baseSalary,double activeHours){
-        Teacher newPartTimeTeacher = new PartTimeTeacher(name,id, baseSalary, activeHours);
+    public String addPartTimeTeacher(String name, double baseSalary,double activeHours){
+        Teacher newPartTimeTeacher = new PartTimeTeacher(name,teacherCount, baseSalary, activeHours);
         teacherCount++;
         activeTeacherIds.add(teacherCount);
         teachers.put(teacherCount,newPartTimeTeacher);
-        return "Teacher has been created with id: " + id;
+        return "Teacher has been created with id: " + teacherCount;
     }
 
-    public String addFullTimeTeacher(String name, int id, double baseSalary, double yearsOfExperience){
-        Teacher newFullTimeTeacher = new FullTimeTeacher(name,id,baseSalary, yearsOfExperience);
+    public String addFullTimeTeacher(String name, double baseSalary, double yearsOfExperience){
+        Teacher newFullTimeTeacher = new FullTimeTeacher(name,teacherCount,baseSalary, yearsOfExperience);
         teacherCount++;
         activeTeacherIds.add(teacherCount);
         teachers.put(teacherCount,newFullTimeTeacher);
-        return "Teacher has been created with id: " + id;
+        return "Teacher has been created with id: " + teacherCount;
     }
 
     public void removeTeacherById(int id){
@@ -99,6 +116,10 @@ public class University {
 
     public void removeStudentById(int id){
         activeStudentIds.remove(id);
+    }
+
+    public String queryStudentClassesById(int id){
+        return students.get(id).getAllClasses();
     }
 
 

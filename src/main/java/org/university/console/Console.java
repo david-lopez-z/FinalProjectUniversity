@@ -1,10 +1,16 @@
-package org.university;
+package org.university.console;
+
+import org.university.Course;
+import org.university.Student;
+import org.university.University;
 
 import java.util.Scanner;
 
 public class Console {
-    public static void main(String[] args) {
 
+    private static final University university = DataInitializer.initializeData();
+
+    public static void main(String[] args) {
         displayWelcomeMessage();
         displayMainMenu();
     }
@@ -34,28 +40,32 @@ public class Console {
 
     private static void displayMainMenu() {
         System.out.println("\nSelect an option to continue:\n" +
-                "1. Add a new recipe\n" +
-                "2. Query all recipes\n" +
-                "3. Swap recipes.\n" +
-                "4. Recipe count. \n" +
-                "5. Exit.\n");
+                "1. Query All professors\n" +
+                "2. Query classes info\n" +
+                "3. Create new student and add him to a class.\n" +
+                "4. Create new class with existing info \n" +
+                "5. List all classes for a specific student\n"+
+                "6. Exit.\n");
 
-        String input = getStringInput();    
+        String input = getStringInput();
 
         switch (input) {
             case "1":
-
+                System.out.println(university.queryAllTeachers());
                 break;
             case "2":
-
+                displayQueryAllClassesMenu();
                 break;
             case "3":
-
+                createNewStudent();
                 break;
             case "4":
 
                 break;
             case "5":
+                
+                break;
+            case "6":
                 exit();
                 break;
             default:
@@ -67,6 +77,44 @@ public class Console {
         displayMainMenu();
 
     }
+
+    public static void createNewStudent(){
+        System.out.println("Input student's name");
+        String name = getStringInput();
+        System.out.println("Which class does this student belong to (input class name as is)");
+        String classname = getStringInput();
+        Student student = university.addStudent(name);
+        university.getClassByName(classname).addStudent(student);
+        System.out.println("Student added successfully");
+
+    }
+
+
+    private static void displayQueryAllClassesMenu(){
+        //System.out.println("this works");
+        System.out.println(university.queryAllClasses());
+
+        System.out.println("\nSelect an option to continue:\n" +
+                "1. Get detailed class info\n" +
+                "2. Back to main menu\n");
+
+        String input = getStringInput();
+
+        switch (input) {
+            case "1":
+                System.out.println("Please input the class name as is.");
+                String name = getStringInput();
+                System.out.println(university.queryDetailedClassByName(name));
+                break;
+            case "2":
+                return;
+            default:
+                System.out.println("Invalid input, please try again.");
+                displayMainMenu();
+                break;
+        }
+    }
+
     private static void exit() {
         System.out.println("                                                                                 \n" +
                 "         ,----.                    ,--.,--.                                      \n" +

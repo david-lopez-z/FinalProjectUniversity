@@ -3,8 +3,14 @@ package org.university;
 import org.university.teacher.Teacher;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Course {
+    private static HashMap<String,Course> availableClasses = new HashMap<>();
+
+    public static HashMap<String,Course> getAvailableClassesHashmap(){
+        return availableClasses;
+    }
     private String name;
     private String description;
     private ArrayList<Student> students = new ArrayList<>();
@@ -43,7 +49,7 @@ public class Course {
         sb.append("Teacher: ").append(teacher).append("\n");
         sb.append("List of students: \n");
         for (Student student:this.students){
-            sb.append(student.toString());
+            sb.append(student.toString()).append('\n');
         }
 
         return sb.toString();
