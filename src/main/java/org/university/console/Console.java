@@ -91,6 +91,11 @@ public class Console {
             case "6":
                 queryAllStudents();
                 break;
+
+            case "7":
+                exit();
+                break;
+
             default:
                 System.out.println("Invalid input, please try again.");
                 displayMainMenu();
