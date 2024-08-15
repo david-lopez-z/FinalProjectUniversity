@@ -3,7 +3,10 @@ package org.university.console;
 import org.university.Course;
 import org.university.Student;
 import org.university.University;
+import org.university.teacher.Teacher;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console {
@@ -37,6 +40,26 @@ public class Console {
     private static String getStringInput() {
         return input.nextLine().trim();
     }
+    private static long getNumericInput() {
+        long number = 0;
+        try {
+            number = input.nextLong();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input, please try again");
+            input.nextLine();
+            return getNumericInput();
+        }
+
+        if (number < -1) {
+            System.out.println("Invalid input, please try again");
+            input.nextLine();
+            return getNumericInput();
+        }
+
+        input.nextLine();
+
+        return number;
+    }
 
     private static void displayMainMenu() {
         System.out.println("\nSelect an option to continue:\n" +
@@ -45,7 +68,8 @@ public class Console {
                 "3. Create new student and add him to a class.\n" +
                 "4. Create new class with existing info \n" +
                 "5. List all classes for a specific student\n"+
-                "6. Exit.\n");
+                "6. Query all students \n" +
+                "7. Exit.\n");
 
         String input = getStringInput();
 
@@ -60,13 +84,13 @@ public class Console {
                 createNewStudent();
                 break;
             case "4":
-
+                createClassUsingExistingInfo();
                 break;
             case "5":
-                
+                listAllClasses();
                 break;
             case "6":
-                exit();
+                queryAllStudents();
                 break;
             default:
                 System.out.println("Invalid input, please try again.");
@@ -76,6 +100,47 @@ public class Console {
 
         displayMainMenu();
 
+    }
+
+    public static void queryAllStudents(){
+        System.out.println(university.queryAllStudents());
+    }
+
+    private static void createClassUsingExistingInfo() {
+        System.out.println("Input the class name:");
+        String className = getStringInput();
+
+        System.out.println("Input the class description:");
+        String description = getStringInput();
+
+        ArrayList<Student> students = new ArrayList<>();
+        System.out.println("Input the student IDs (input -1 to stop):");
+        int studentId = (int) getNumericInput();
+        while (studentId != -1) {
+            try {
+                Student student = university.getStudentById(studentId);
+                students.add(student);
+            } catch (Exception e) {
+                System.out.println("Invalid student ID: " + studentId);
+            }
+            System.out.println("Input the student IDs (input -1 to stop):");
+            studentId = (int) getNumericInput();
+        }
+
+        System.out.println("Input the teacher ID:");
+        int teacherId = (int) getNumericInput();
+        try {
+            Teacher teacher = university.getTeacherById(teacherId);
+            university.addClass(className, description, students, teacher);
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+        }
+    }
+
+    public static void listAllClasses(){
+        System.out.println("Input the id of the student, check student list if unknown");
+        int input = (int) getNumericInput();
+        System.out.println(university.queryStudentClassesById(input));
     }
 
     public static void createNewStudent(){

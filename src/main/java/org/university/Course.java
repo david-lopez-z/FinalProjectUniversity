@@ -34,7 +34,7 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Nombre: " + name + "\n Descripcion: " + description + "\n";
+        return "Name: " + name + "\n Description: " + description + "\n";
     }
 
     public String getName(){
