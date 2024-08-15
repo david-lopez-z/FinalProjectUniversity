@@ -1,6 +1,7 @@
 package org.university;
 
-import org.university.teacher.Teacher;
+import org.university.people.Student;
+import org.university.people.teacher.Teacher;
 
 import java.util.ArrayList;
 import java.util.HashMap;

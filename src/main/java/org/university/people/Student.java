@@ -1,9 +1,11 @@
-package org.university;
+package org.university.people;
+
+import org.university.Course;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Student extends Person{
+public class Student extends Person {
     private static HashMap<Integer,Student> students = new HashMap<>();
 
     private ArrayList<Course> courses = new ArrayList<>();
