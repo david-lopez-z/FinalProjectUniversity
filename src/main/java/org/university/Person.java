@@ -14,4 +14,9 @@ abstract public class Person {
     }
 
     protected int getId(){return this.id;}
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

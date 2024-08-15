@@ -13,8 +13,8 @@ public class University {
     private HashMap<String,Course> availableClasses = new HashMap<>();
     private HashMap<Integer,Teacher> teachers = new HashMap<>();
     private HashMap<Integer,Student> students = new HashMap<>();
-    private int studentCount = 0;
-    private int teacherCount = 0;
+    private int studentCount = -1;  // These two start at -1 because I need the first id to be 0
+    private int teacherCount = -1; // and don't want to completely rework the methods mb
     private List<Integer> activeStudentIds = new ArrayList<>();
     private List<Integer> activeTeacherIds = new ArrayList<>();
     private List<String> activeClasses = new ArrayList<>();
@@ -58,6 +58,11 @@ public class University {
         return sb.toString();
     }
 
+    public String queryClassByName(String name){
+
+        return availableClasses.get(name).toString();
+    }
+
     public  String addStudent(String name){
         studentCount++;
         Student newStudent = new Student(name,studentCount);
@@ -88,8 +93,12 @@ public class University {
         return "Teacher has been created with id: " + id;
     }
 
-    public void removeTeacher(int id){
-        
+    public void removeTeacherById(int id){
+        activeTeacherIds.remove(id);
+    }
+
+    public void removeStudentById(int id){
+        activeStudentIds.remove(id);
     }
 
 

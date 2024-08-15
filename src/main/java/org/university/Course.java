@@ -28,10 +28,24 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Nombre: " + name + " Descripcion: " + description + "\n";
+        return "Nombre: " + name + "\n Descripcion: " + description + "\n";
     }
 
     public String getName(){
         return this.name;
+    }
+
+    public String getAllInfo(){
+        String output = "";
+        StringBuilder sb = new StringBuilder(output);
+        sb.append("Class name: ").append(this.name).append("\n");
+        sb.append("Class description: ").append(this.description).append("\n");
+        sb.append("Teacher: ").append(teacher).append("\n");
+        sb.append("List of students: \n");
+        for (Student student:this.students){
+            sb.append(student.toString());
+        }
+
+        return sb.toString();
     }
 }
